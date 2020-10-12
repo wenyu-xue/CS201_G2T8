@@ -1,4 +1,4 @@
-printf (" Unesite a, dimenzijun \n" );#include <stdio.h>#include <stdio.h>
+#include <stdio.h>
 #include <math.h>
 int main() {
  float a1,a2,b1,b2,x,y;
