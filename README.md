@@ -1,9 +1,13 @@
 
 # CS201_G2T8
 Source code plagiarism
+
 "codes" directory - contains maven project for algorithms
+
 "c-to-json" directory - contains c code from https://github.com/deiuch/c-to-json to convert c code to ASTs in json
+
 "data" directory - EDA of our dataset
+
 "helpers" directory - to count the chracters
 
 ## Installation for "codes"
