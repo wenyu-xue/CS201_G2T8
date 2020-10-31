@@ -22,7 +22,7 @@ mvn exec:java  -D"exec.mainClass"="jsonparsing.JsonTestMain"
 ## Usage for "c-to-json"
 for linux/ubuntu
 ```
-cd c-to-json
+cd c2json
 sh parse.sh
 ```
 Specify the c file you want to convert and its directory.
