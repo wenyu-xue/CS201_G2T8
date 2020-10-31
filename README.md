@@ -9,14 +9,16 @@ Source code plagiarism
 ## Installation for "codes"
 
 codes directory, if u have intellij, just import the project and press the play button
-```cd codes
+```
+cd codes
 mvn compile
 mvn exec:java  -D"exec.mainClass"="jsonparsing.JsonTestMain"
 ```
 
 ## Usage for "c-to-json"
 for linux/ubuntu
-```cd c-to-json
+```
+cd c-to-json
 sh parse.sh
 ```
 Specify the c file you want to convert and its directory.
