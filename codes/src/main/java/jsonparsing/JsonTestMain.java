@@ -31,15 +31,13 @@ public class JsonTestMain {
      
                 String value = fieldValue.toString();
                 
-                if (!fieldValue.isArray() && value.contains("Identifier") ){
+                if (!fieldValue.isArray() && (value.contains("Identifier")||value.contains("IntegerConstant")||value.contains("CharacterConstant")  ) ){
                         //System.out.println(parent.toString());
                         result.add(parent.toString());
                         result.add(root.get("content"));
                 }
                 if (fieldName.equals("type")){
                     parent = fieldValue;
-
-
                 }
                 
                 traverse(fieldValue, parent);
@@ -61,7 +59,8 @@ public class JsonTestMain {
     public static void main(String[] args) throws Exception {
 
         JsonNode parent = null;
-
+        // Change the filename to the specific file in resource folder
+        // student1013.json // student1021.json
         String fileName = "src/main/resources/json/out.json";
         String json = readFileAsString(fileName);
         try {
