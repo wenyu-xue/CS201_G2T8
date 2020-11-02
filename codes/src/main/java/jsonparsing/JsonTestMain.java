@@ -18,23 +18,39 @@ public class JsonTestMain {
 
 
     public static ArrayList<Object> result =  new ArrayList<> ();
-    public static void traverse(JsonNode root){
+    
+    public static void traverse(JsonNode root, JsonNode parent){
         if(root.isObject()){
             Iterator<String> fieldNames;
             fieldNames = root.fieldNames();
+            
             while(fieldNames.hasNext()) {
                 String fieldName = fieldNames.next();
                 JsonNode fieldValue = root.get(fieldName);
-                if (!fieldValue.isArray()){
-                        result.add(fieldValue);
+
+     
+                String value = fieldValue.toString();
+                
+                if (!fieldValue.isArray() && value.contains("Identifier") ){
+                        //System.out.println(parent.toString());
+                        result.add(parent.toString());
+                        result.add(root.get("content"));
                 }
-                traverse(fieldValue);
+                if (fieldName.equals("type")){
+                    parent = fieldValue;
+
+
+                }
+                
+                traverse(fieldValue, parent);
+                
             }
         } else if(root.isArray()){
             ArrayNode arrayNode = (ArrayNode) root;
             for(int i = 0; i < arrayNode.size(); i++) {
                 JsonNode arrayElement = arrayNode.get(i);
-                traverse(arrayElement);
+                
+                traverse(arrayElement, parent);
             }
         } else {
 //                System.out.println(root);
@@ -44,11 +60,13 @@ public class JsonTestMain {
 
     public static void main(String[] args) throws Exception {
 
+        JsonNode parent = null;
+
         String fileName = "src/main/resources/json/out.json";
         String json = readFileAsString(fileName);
         try {
         JsonNode node = Json.parse(json);
-        traverse(node);
+        traverse(node, parent);
         System.out.println(result);
         }
         catch(IOException e){
