@@ -1,17 +1,18 @@
 package jsonparsing.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Node<E> {
+public class Node<E> implements Position<E> {
     private Node<E> parent;
-    private E content;
+    private E element;
     private String type;
     private Integer childrenNumber;
-    private List <Node<E>> children;
+    private List <Node<E>> children = new ArrayList<>();
 
-    public Node (Node<E> parent, E content, String type, Integer childrenNumber, List<Node<E>> children){
+    public Node (Node<E> parent, E element, String type, Integer childrenNumber, List<Node<E>> children){
         this.parent = parent; // if parent node is null, the node is the root node.
-        this.content = content;
+        this.element = element;
         this.type = type;
         this.childrenNumber = childrenNumber;
         this.children = children;
@@ -22,8 +23,9 @@ public class Node<E> {
         return type;
     }
 
-    public E getContent(){
-        return content;
+    @Override
+    public E getElement(){
+        return element;
     }
 
     public int getChildCount(){
@@ -33,6 +35,10 @@ public class Node<E> {
 
     public List<Node<E>> children(){
         return children;
+    }
+
+    public void addChild(Node<E> child){
+        children.add(child);
     }
 
     public Node<E> getChildAt(int childIndex){
