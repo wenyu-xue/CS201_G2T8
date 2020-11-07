@@ -23,25 +23,23 @@ public class JsonTestMain {
         if(root.isObject()){
             Iterator<String> fieldNames;
             fieldNames = root.fieldNames();
-            
             while(fieldNames.hasNext()) {
                 String fieldName = fieldNames.next();
                 JsonNode fieldValue = root.get(fieldName);
-
-     
                 String value = fieldValue.toString();
                 
-                if (!fieldValue.isArray() && (value.contains("Identifier")||value.contains("IntegerConstant")||value.contains("CharacterConstant")  ) ){
-                        //System.out.println(parent.toString());
-                        result.add(parent.toString());
-                        result.add(root.get("content"));
-                }
+                // if (!fieldValue.isArray() && (value.contains("Identifier")||value.contains("IntegerConstant")||value.contains("CharacterConstant")  ) ){
+                // if (!fieldValue.isArray() ){ 
+                //     //System.out.println(parent.toString());
+                //         // result.add(parent.toString());
+                //         result.add(root.get("type"));
+                // }
                 if (fieldName.equals("type")){
                     parent = fieldValue;
+                    result.add(root.get("type"));
                 }
                 
                 traverse(fieldValue, parent);
-                
             }
         } else if(root.isArray()){
             ArrayNode arrayNode = (ArrayNode) root;
