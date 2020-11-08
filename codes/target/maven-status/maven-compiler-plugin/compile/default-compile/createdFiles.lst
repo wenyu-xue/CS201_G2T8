@@ -1,2 +1,12 @@
-jsonparsing\Json.class
-jsonparsing\JsonTestMain.class
+jsonparsing/entity/Tree.class
+jsonparsing/copycat/Worker.class
+jsonparsing/util/Algorithm.class
+jsonparsing/entity/AbstractTree.class
+jsonparsing/entity/AbstractSyntaxTree.class
+jsonparsing/util/OrderHash.class
+jsonparsing/parser/JsonToTree.class
+jsonparsing/entity/AbstractTree$1.class
+jsonparsing/entity/Node.class
+jsonparsing/util/QuickAndDirtyAlgorithm.class
+jsonparsing/entity/AbstractTree$ElementIterator.class
+jsonparsing/entity/Position.class
