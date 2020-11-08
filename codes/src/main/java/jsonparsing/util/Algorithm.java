@@ -43,36 +43,23 @@ public class Algorithm{
 
     }
 
-    public static void traverse(LinkedList<String> list,Node root, String temp ){
+    public static String traverse(LinkedList<String> list,Node root ){
 
         if (root.children().isEmpty()){
             list.addFirst(root.getType());
+            return root.getType();
         } else {
             String s ="";
             List<String> tempList = new ArrayList<>();
 
             for (int i = 0; i<root.children().size(); i++){
-                traverse(list,root.getChildAt(i), temp);
-                s+=list.get(i);
-                if (root.children().size()>1){
-                    tempList.add(s+=list.get(i));
-                    
-                }
+                s += traverse(list,root.getChildAt(i));
+                System.out.println(s);
+      
             }
-            if (root.children().size()>1){
-                String toadd = tempList.get(tempList.size()-1);
 
-                tempList.remove(tempList.size()-1);
-                list.addFirst(toadd);
-                
-            }else{
-                list.addFirst(root.getType()+s); 
-            }
-  
-                       
-
-
-
+            list.addFirst(root.getType()+s); 
+            return root.getType();
 
         }
     }
