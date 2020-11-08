@@ -16,10 +16,9 @@ public class AbstractSyntaxTree {
         }
     }
 
-    public Node getRoot() {
-        return root;
+    public Node getRoot(){
+        return this.root;
     }
-
 
     public void addChild(Node parent, Node child ){
         parent.addChild(child);
