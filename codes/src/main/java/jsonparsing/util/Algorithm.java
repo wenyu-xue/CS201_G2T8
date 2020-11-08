@@ -14,9 +14,10 @@ import java.util.*;
 import static jsonparsing.Json.readFileAsString;
 
 public class Algorithm{
-    public static String arr[] = { "FunctionDefinition", "IterationStatement","Expression",
+    public static String arr[] = {
+            "FunctionDefinition", "IterationStatement","Expression",
             "ArithmeticExpression","PostfixExpression","ParameterList", "ParameterDeclaration",
-    "DeclarationSpecifier","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
+        "DeclarationSpecifier","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
 
     public static Set<String> set = new HashSet<>(Arrays.asList(arr));
     public static Map<String,String> hashDict =new HashMap<String, String>() {{
@@ -31,42 +32,6 @@ public class Algorithm{
         }
         return h;
 
-    }
-    public static Node parsing(JsonNode root, Node parent){
-        System.out.println(root.get("type"));
-
-        if (root.get("type")!= null && root.get("type").equals("TranslationUnit")){
-            Node n = new Node(parent, null, "TranslationUnit",Integer.parseInt(root.get("children_number").toString()) ,null);
-            JsonNode children = root.get("children");
-            n = parsing(children, n);
-            System.out.println("==================");
-            System.out.println(n.getChildCount());
-            return n;
-        }
-        else if(root.isObject()){
-            JsonNode type = root.get("type");
-            if ( set.contains(type.toString())) {
-                Integer childrenNumber = Integer.parseInt(root.get("children_number").toString());
-                Node n = new Node(parent, null, type.toString(), childrenNumber,null);
-                parent.addChild(n);
-                JsonNode children = root.get("children");
-                parsing(children, n);
-            }else if (Integer.parseInt(root.get("children_number").toString())!=0){
-                JsonNode children = root.get("children");
-                parsing(children, parent);
-            } else{
-                return null;
-            }
-
-
-        } else if(root.isArray()){
-            ArrayNode arrayNode = (ArrayNode) root;
-            for(int i = 0; i < arrayNode.size(); i++) {
-                JsonNode arrayElement = arrayNode.get(i);
-                parsing(arrayElement, parent);
-            }
-        }
-        return null;
     }
     public static void main(String[] args) throws Exception {
         AbstractSyntaxTree ast1 = new AbstractSyntaxTree();
@@ -95,23 +60,21 @@ public class Algorithm{
 
         List<String> result =traverse(new LinkedList<String>(),root1,"");
         System.out.println(result);
-//        JsonNode parent = null;
-//        // Change the filename to the specific file in resource folder
-//        // student1013.json // student1021.json
-//        String fileName = "src/main/resources/json/out.json";
-//        String json = readFileAsString(fileName);
-//        try {
-//            JsonNode node = Json.parse(json);
-//
-//            Node p =parsing(node, null);
-//
-//
-//        }
-//        catch(IOException e){
-//            e.printStackTrace();
-//        }
+        JsonNode parent = null;
+        // Change the filename to the specific file in resource folder
+        // student1013.json // student1021.json
+        String fileName = "src/main/resources/json/out.json";
+        String json = readFileAsString(fileName);
+        try {
+            JsonNode rootNode = Json.parse(json);
+            Integer childrenNum = Integer.parseInt(rootNode.get("children_number").toString());
+            Node n = new Node(null, null, "TranslationUnit",childrenNum ,null);
+            JsonNode child = rootNode.get("children");
 
-
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
     public static List<String> traverse(LinkedList<String> list,Node root, String temp ){
         if (root.children()== null){
@@ -129,8 +92,6 @@ public class Algorithm{
             list.addFirst(temp);
             return list;
         }
-
-
     }
 
 
