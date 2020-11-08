@@ -27,7 +27,7 @@ public class JsonTestMain {
             List<Object> result = new ArrayList<>();
             JsonNode node = parse(json);
             AbstractSyntaxTree ast= new AbstractSyntaxTree();
-            result = JsonToTree.traverse(node, result, ast);
+            result = JsonToTree.traverse(node, result, ast, null);
             System.out.println(result);
         }
         catch(IOException e){

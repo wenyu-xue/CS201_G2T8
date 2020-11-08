@@ -8,8 +8,12 @@ public class AbstractSyntaxTree {
     private int size;
 
 
-    public void addRoot(Node root){
-        this.root = root;
+    public void addRoot(Node root) throws IllegalArgumentException{
+        if (root != null){
+            this.root = root;
+        } else {
+            throw new IllegalArgumentException("Tree already has a root");
+        }
     }
 
     public void addChild(Node parent, Node child ){
