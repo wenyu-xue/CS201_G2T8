@@ -31,6 +31,7 @@ public class Algorithm{
         put("\"ParameterDeclaration\"", "h");
         put("\"DeclarationSpecifiers\"", "i");
         put("\"TypeSpecifier\"", "j");
+        
 
     }};
 
@@ -47,19 +48,16 @@ public class Algorithm{
 
         if (root.children().isEmpty()){
             list.addFirst(root.getType());
+    
             return root.getType();
         } else {
-            String s ="";
-            List<String> tempList = new ArrayList<>();
-
+            String s = root.getType();
             for (int i = 0; i<root.children().size(); i++){
-                s += traverse(list,root.getChildAt(i));
-                System.out.println(s);
-      
+                s+=traverse(list,root.getChildAt(i));
             }
-
-            list.addFirst(root.getType()+s); 
-            return root.getType();
+            System.out.println(s);
+            list.addFirst(s);
+            return s;
 
         }
     }
