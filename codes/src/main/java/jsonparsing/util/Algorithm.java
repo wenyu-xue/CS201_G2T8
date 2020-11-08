@@ -14,25 +14,26 @@ import java.util.*;
 import static jsonparsing.parser.Json.readFileAsString;
 
 public class Algorithm{
-    public static String arr[] = {
-            "FunctionDefinition", "IterationStatement","Expression",
-            "ArithmeticExpression","PostfixExpression","ParameterList", "ParameterDeclaration",
-        "DeclarationSpecifiers","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
 
-    public static Set<String> set = new HashSet<>(Arrays.asList(arr));
     public static Map<String,String> hashDict =new HashMap<String, String>() {{
-        put("\"TranslationUnit\"", "a");
-        put("\"FunctionDefinition\"", "b");
-        put("\"IterationStatement\"", "c");
-        put("\"Expression\"", "d");
-        put("\"ArithmeticExpression\"", "e");
-        put("\"PostfixExpression\"", "f");
-        put("\"ParameterList\"", "g");
-        put("\"ParameterDeclaration\"", "h");
-        put("\"DeclarationSpecifiers\"", "i");
-        put("\"TypeSpecifier\"", "j");
-        
-
+        put("TranslationUnit", "a");
+        put("FunctionDefinition", "b");
+        put("IterationStatement", "c");
+        put("Expression", "d");
+        put("ArithmeticExpression", "e");
+        put("PostfixExpression", "f");
+        put("ParameterList", "g");
+        put("ParameterDeclaration", "h");
+        put("DeclarationSpecifiers", "i");
+        put("TypeSpecifier", "j");
+        put("Identifier", "k");
+        put("DirectDeclarator", "l");
+        put("Declarator", "m");
+        put("Initializer", "n");
+        put("IntegerConstant", "o");
+        put("InitDeclarator", "p");
+        put("InitDeclaratorList", "q");
+        put("Declaration", "r");
     }};
 
     public static int hash(String input) {
@@ -45,20 +46,20 @@ public class Algorithm{
     }
 
     public static String traverse(LinkedList<String> list,Node root ){
-
         if (root.children().isEmpty()){
-            list.addFirst(root.getType());
-    
-            return root.getType();
-        } else {
-            String s = root.getType();
-            for (int i = 0; i<root.children().size(); i++){
-                s+=traverse(list,root.getChildAt(i));
-            }
-            System.out.println(s);
-            list.addFirst(s);
-            return s;
+            // Base case: no children
+            String type = root.getType();
+            list.addFirst(type);
+            return type;
 
+        } else {
+            String temp = "";
+            for (Node child : root.children()){
+                temp += traverse(list, child);
+            }
+            String result = root.getType() + temp;
+            list.addFirst(result);
+            return result;
         }
     }
 
