@@ -11,28 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 
+import jsonparsing.constants.Constants;
+
 import static jsonparsing.parser.Json.readFileAsString;
 
 public class Algorithm{
-    public static String arr[] = {
-            "FunctionDefinition", "IterationStatement","Expression",
-            "ArithmeticExpression","PostfixExpression","ParameterList", "ParameterDeclaration",
-        "DeclarationSpecifiers","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
 
-    public static Set<String> set = new HashSet<>(Arrays.asList(arr));
-    public static Map<String,String> hashDict =new HashMap<String, String>() {{
-        put("TranslationUnit", "a");
-        put("FunctionDefinition", "b");
-        put("IterationStatement", "c");
-        put("Expression", "d");
-        put("ArithmeticExpression", "e");
-        put("PostfixExpression", "f");
-        put("ParameterList", "g");
-        put("ParameterDeclaration", "h");
-        put("DeclarationSpecifiers", "i");
-        put("TypeSpecifier", "j");
 
-    }};
+    public static Set<String> set = new HashSet<>(Arrays.asList(Constants.TYPES));
 
     public static int hash(String input) {
         int h = 0;
