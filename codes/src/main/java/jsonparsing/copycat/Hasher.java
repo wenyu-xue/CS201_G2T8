@@ -34,7 +34,7 @@ public class Hasher {
          *  -
          */
         //
-        double score = 0.0;
+        long score = 0L;
 
         return (long) score;
 
