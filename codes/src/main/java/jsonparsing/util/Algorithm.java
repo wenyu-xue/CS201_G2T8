@@ -21,16 +21,16 @@ public class Algorithm{
 
     public static Set<String> set = new HashSet<>(Arrays.asList(arr));
     public static Map<String,String> hashDict =new HashMap<String, String>() {{
-        put("\"TranslationUnit\"", "a");
-        put("\"FunctionDefinition\"", "b");
-        put("\"IterationStatement\"", "c");
-        put("\"Expression\"", "d");
-        put("\"ArithmeticExpression\"", "e");
-        put("\"PostfixExpression\"", "f");
-        put("\"ParameterList\"", "g");
-        put("\"ParameterDeclaration\"", "h");
-        put("\"DeclarationSpecifiers\"", "i");
-        put("\"TypeSpecifier\"", "j");
+        put("TranslationUnit", "a");
+        put("FunctionDefinition", "b");
+        put("IterationStatement", "c");
+        put("Expression", "d");
+        put("ArithmeticExpression", "e");
+        put("PostfixExpression", "f");
+        put("ParameterList", "g");
+        put("ParameterDeclaration", "h");
+        put("DeclarationSpecifiers", "i");
+        put("TypeSpecifier", "j");
 
     }};
 
@@ -44,23 +44,20 @@ public class Algorithm{
     }
 
     public static String traverse(LinkedList<String> list,Node root ){
-
         if (root.children().isEmpty()){
-            list.addFirst(root.getType());
-            return root.getType();
+            // Base case: no children
+            String type = root.getType();
+            list.addFirst(type);
+            return type;
+
         } else {
-            String s ="";
-            List<String> tempList = new ArrayList<>();
-
-            for (int i = 0; i<root.children().size(); i++){
-                s += traverse(list,root.getChildAt(i));
-                System.out.println(s);
-      
+            String temp = "";
+            for (Node child : root.children()){
+                temp += traverse(list, child);
             }
-
-            list.addFirst(root.getType()+s); 
-            return root.getType();
-
+            String result = root.getType() + temp;
+            list.addFirst(result);
+            return result;
         }
     }
 
