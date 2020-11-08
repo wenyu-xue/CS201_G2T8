@@ -17,7 +17,7 @@ public class Algorithm{
     public static String arr[] = {
             "FunctionDefinition", "IterationStatement","Expression",
             "ArithmeticExpression","PostfixExpression","ParameterList", "ParameterDeclaration",
-        "DeclarationSpecifier","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
+        "DeclarationSpecifiers","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
 
     public static Set<String> set = new HashSet<>(Arrays.asList(arr));
     public static Map<String,String> hashDict =new HashMap<String, String>() {{
@@ -45,24 +45,34 @@ public class Algorithm{
 
     public static void traverse(LinkedList<String> list,Node root, String temp ){
 
-        if (root.children()== null){
-            System.out.println(root.getType());
-            String hashString = hashDict.get(root.getType());
+        if (root.children().isEmpty()){
             list.addFirst(root.getType());
-        }else{
-            String type = root.getType();
+        } else {
             String s ="";
+            List<String> tempList = new ArrayList<>();
 
             for (int i = 0; i<root.children().size(); i++){
                 traverse(list,root.getChildAt(i), temp);
-                 s= s+ list.get(i);
-
-//                temp = temp.concat(list.get(i));
+                s+=list.get(i);
+                if (root.children().size()>1){
+                    tempList.add(s+=list.get(i));
+                    
+                }
             }
+            if (root.children().size()>1){
+                String toadd = tempList.get(tempList.size()-1);
 
-            String hashString= hashDict.get(root.getType()) ;
-            list.addFirst(root.getType()+s);
-//            temp ="";
+                tempList.remove(tempList.size()-1);
+                list.addFirst(toadd);
+                
+            }else{
+                list.addFirst(root.getType()+s); 
+            }
+  
+                       
+
+
+
 
         }
     }

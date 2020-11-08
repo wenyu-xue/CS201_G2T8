@@ -15,13 +15,15 @@ import static jsonparsing.parser.Json.parse;
 
 public class JsonTestMain {
     public static void main(String[] args) throws Exception {
-        String fileName = "src/main/resources/json/out.json";
+        String fileName = "src/main/resources/json/test.json";
         String json = readFileAsString(fileName);
         try {
             JsonNode node = parse(json);
             AbstractSyntaxTree ast= new AbstractSyntaxTree();
             ast = JsonToTree.parse(node, ast, null);
             ast.printTree();
+            System.out.println("=======================");
+            ast.printTreePostOrder();
 
             Algorithm algorithm = new Algorithm();
             LinkedList<String> list = new LinkedList<String>();

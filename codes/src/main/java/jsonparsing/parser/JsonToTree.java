@@ -13,7 +13,9 @@ public class JsonToTree {
     public static String arr[] = {
         "\"FunctionDefinition\"", "\"IterationStatement\"","\"Expression\"",
         "\"ArithmeticExpression\"","\"PostfixExpression","\"ParameterList\"", "\"ParameterDeclaration\"",
-    "\"DeclarationSpecifier\"","\"TypeSpecifier\"","\"DeclarationSpecifier\"","\"TypeSpecifier\""};
+    "\"DeclarationSpecifiers\"","\"TypeSpecifier\"","\"DeclarationSpecifier\"","\"TypeSpecifier\""
+            ,"\"Identifier\"","\"DirectDeclarator\"","\"Declarator\"",
+            "\"Initializer\"","\"IntegerConstant\"","\"InitDeclarator\"","\"InitDeclaratorList\"","\"Declaration\""};
     public static Set<String> set = new HashSet<>(Arrays.asList(arr));
     public static AbstractSyntaxTree parse(JsonNode root, AbstractSyntaxTree ast, Node parent){
         if(root.isObject()){
