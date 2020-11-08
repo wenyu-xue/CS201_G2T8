@@ -21,6 +21,25 @@ public class AbstractSyntaxTree {
         size++;
     }
 
-    public void printTree(Node root){
+    public boolean isEmpty(){
+       return size == 0;
     }
+    private void preorderSubtree(Node p, List<Node> snapshot) {
+        snapshot.add(p);                       // for preorder, we add position p before exploring subtrees
+        for (Node c : p.children())
+            preorderSubtree(c, snapshot);
+    }
+
+    public Iterable<Node> preorder() {
+        List<Node> snapshot = new ArrayList<>();
+        if (!isEmpty())
+            preorderSubtree(root, snapshot);   // fill the snapshot recursively
+        return snapshot;
+    }
+    public void printTree(){
+        for (Node n : preorder()){
+            System.out.println("Children number: " + n.getChildCount() + ", content: " + n.getContent());
+        }
+    }
+
 }

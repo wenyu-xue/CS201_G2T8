@@ -9,7 +9,7 @@
             "children_number": 1,
             "children": [
                 {
-                    "type": "FunctionDefinition",
+                    "type": "Child of B",
                     "content": "e",
                     "children_number": 0,
                     "children": null
@@ -19,13 +19,20 @@
         {
             "type": "FunctionDefinition",
             "content": "c",
-            "children_number": 0,
-            "children": null
+            "children_number": 1,
+            "children": [
+                {
+                    "type": "Child of c",
+                    "content": "f",
+                    "children_number": 0,
+                    "children": null
+                }
+            ]
         },
         {
             "type": "FunctionDefinition",
             "content": "d",
-            "children_number": 3,
+            "children_number": 0,
             "children": null
         }
     ]
