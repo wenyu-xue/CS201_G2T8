@@ -11,30 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 
+import jsonparsing.constants.Constants;
+
 import static jsonparsing.parser.Json.readFileAsString;
 
 public class Algorithm{
 
-    public static Map<String,String> hashDict =new HashMap<String, String>() {{
-        put("TranslationUnit", "a");
-        put("FunctionDefinition", "b");
-        put("IterationStatement", "c");
-        put("Expression", "d");
-        put("ArithmeticExpression", "e");
-        put("PostfixExpression", "f");
-        put("ParameterList", "g");
-        put("ParameterDeclaration", "h");
-        put("DeclarationSpecifiers", "i");
-        put("TypeSpecifier", "j");
-        put("Identifier", "k");
-        put("DirectDeclarator", "l");
-        put("Declarator", "m");
-        put("Initializer", "n");
-        put("IntegerConstant", "o");
-        put("InitDeclarator", "p");
-        put("InitDeclaratorList", "q");
-        put("Declaration", "r");
-    }};
+
+    public static Set<String> set = new HashSet<>(Arrays.asList(Constants.TYPES));
 
     public static int hash(String input) {
         int h = 0;
@@ -49,15 +33,18 @@ public class Algorithm{
         if (root.children().isEmpty()){
             // Base case: no children
             String type = root.getType();
-            list.addFirst(type);
-            return type;
+     
+            list.addFirst(Constants.HASHDICT.get(type));
+            return Constants.HASHDICT.get(type);
 
         } else {
             String temp = "";
             for (Node child : root.children()){
                 temp += traverse(list, child);
             }
-            String result = root.getType() + temp;
+            String type = root.getType();
+         
+            String result =  Constants.HASHDICT.get(type) + temp;
             list.addFirst(result);
             return result;
         }
