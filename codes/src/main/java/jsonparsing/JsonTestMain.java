@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import jsonparsing.entity.AbstractSyntaxTree;
 import jsonparsing.parser.JsonToTree;
+import jsonparsing.util.Algorithm;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import static jsonparsing.parser.Json.readFileAsString;
 import static jsonparsing.parser.Json.parse;
@@ -17,8 +20,14 @@ public class JsonTestMain {
         try {
             JsonNode node = parse(json);
             AbstractSyntaxTree ast= new AbstractSyntaxTree();
-            ast = JsonToTree.traverse(node, ast, null);
+            ast = JsonToTree.parse(node, ast, null);
             ast.printTree();
+
+            Algorithm algorithm = new Algorithm();
+            List<String> result =  algorithm.traverse(new LinkedList<String>(), ast.getRoot(), "");
+            System.out.println(result);
+
+
         }
         catch(IOException e){
             e.printStackTrace();

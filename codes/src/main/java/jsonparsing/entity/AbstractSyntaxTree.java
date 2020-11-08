@@ -15,6 +15,9 @@ public class AbstractSyntaxTree {
             throw new IllegalArgumentException("Tree already has a root");
         }
     }
+    public Node getRoot(){
+        return this.root;
+    }
 
     public void addChild(Node parent, Node child ){
         parent.addChild(child);
