@@ -29,10 +29,9 @@ public class Algorithm{
         put("\"PostfixExpression\"", "f");
         put("\"ParameterList\"", "g");
         put("\"ParameterDeclaration\"", "h");
-        put("\"DeclarationSpecifier\"", "f");
-        put("\"TypeSpecifier\"", "g");
-        put("\"DeclarationSpecifier\"", "h");
-        put("\"TypeSpecifier\"", "h");
+        put("\"DeclarationSpecifiers\"", "i");
+        put("\"TypeSpecifier\"", "j");
+
     }};
 
     public static int hash(String input) {
@@ -44,24 +43,27 @@ public class Algorithm{
 
     }
 
-    public static List<String> traverse(LinkedList<String> list,Node root, String temp ){
-        if (root.children()== null){
-            String hashString = hashDict.get(root.getType());
-            list.addFirst(hashString);
+    public static void traverse(LinkedList<String> list,Node root, String temp ){
 
-            return list;
+        if (root.children()== null){
+            System.out.println(root.getType());
+            String hashString = hashDict.get(root.getType());
+            list.addFirst(root.getType());
         }else{
             String type = root.getType();
+            String s ="";
 
             for (int i = 0; i<root.children().size(); i++){
                 traverse(list,root.getChildAt(i), temp);
-                temp = temp.concat(list.get(i));
+                 s= s+ list.get(i);
+
+//                temp = temp.concat(list.get(i));
             }
-            temp= hashDict.get(root.getType())+temp;
-      
-            list.addFirst(temp);
-            temp ="";
-            return list;
+
+            String hashString= hashDict.get(root.getType()) ;
+            list.addFirst(root.getType()+s);
+//            temp ="";
+
         }
     }
 
