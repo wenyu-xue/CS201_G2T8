@@ -3,30 +3,44 @@ package jsonparsing.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
 
-public class Node<E> implements Position<E> {
-    private Node<E> parent;
-    private E element;
+public class Node {
+    private Node parent;
+    private String content;
     private String type;
     private Integer childrenNumber;
-    private List <Node<E>> children = new ArrayList<>();
+    private List <Node> children = new ArrayList<>();
 
-    public Node (Node<E> parent, E element, String type, Integer childrenNumber, List<Node<E>> children){
+
+    public Node (Node parent, String content, String type, Integer childrenNumber, List<Node> children){
         this.parent = parent; // if parent node is null, the node is the root node.
-        this.element = element;
+        this.content = content;
         this.type = type;
         this.childrenNumber = childrenNumber;
         this.children = children;
+    }
 
+    public Node (Node parent, String content, String type, Integer childrenNumber){
+        this.parent = parent; // if parent node is null, the node is the root node.
+        this.content = content;
+        this.type = type;
+        this.childrenNumber = childrenNumber;
+    }
+
+    public static Node fromJsonNode (Node parent, JsonNode jsonNode){
+        int jsonChildrenNumber = jsonNode.get("children").size();
+        String jsonType = jsonNode.get("type").toString();
+        String jsonContent = jsonNode.get("content").toString();
+        return new Node(parent, jsonContent, jsonType, jsonChildrenNumber);
     }
 
     public String getType(){
         return type;
     }
 
-    @Override
-    public E getElement(){
-        return element;
+    public String getContent(){
+        return content;
     }
 
     public int getChildCount(){
@@ -34,22 +48,22 @@ public class Node<E> implements Position<E> {
     }
 
 
-    public List<Node<E>> children(){
+    public List<Node> children(){
         return children;
     }
 
-    public void addChild(Node<E> child){
+    public void addChild(Node child){
         children.add(child);
     }
 
-    public Node<E> getChildAt(int childIndex){
+    public Node getChildAt(int childIndex){
         return children.get(childIndex);
     }
 
-    public int getIndex(Node<E> nodeToFind){
+    public int getIndex(Node nodeToFind){
         // O(n) operation
         for (int i = 0; i < childrenNumber; i ++){
-            Node<E> child = children.get(i);
+            Node child = children.get(i);
             if (child.equals(nodeToFind)){
                 return i;
             }
@@ -58,7 +72,7 @@ public class Node<E> implements Position<E> {
         return -1;
     }
 
-    public Node<E> getParent(){
+    public Node getParent(){
         return parent;
     }
 

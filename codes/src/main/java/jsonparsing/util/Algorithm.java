@@ -2,7 +2,7 @@ package jsonparsing.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import jsonparsing.Json;
+import jsonparsing.parser.Json;
 import jsonparsing.entity.AbstractSyntaxTree;
 import jsonparsing.entity.*;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 
-import static jsonparsing.Json.readFileAsString;
+import static jsonparsing.parser.Json.readFileAsString;
 
 public class Algorithm{
     public static String arr[] = { "FunctionDefinition", "IterationStatement","Expression",
