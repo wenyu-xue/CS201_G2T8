@@ -19,6 +19,8 @@ public class JsonTestMain {
             AbstractSyntaxTree ast= new AbstractSyntaxTree();
             ast = JsonToTree.traverse(node, ast, null);
             ast.printTree();
+            System.out.println("=======================");
+            ast.printTreePostOrder();
         }
         catch(IOException e){
             e.printStackTrace();
