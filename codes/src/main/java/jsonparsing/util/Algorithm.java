@@ -20,20 +20,19 @@ public class Algorithm{
         "DeclarationSpecifier","TypeSpecifier","DeclarationSpecifier","TypeSpecifier"};
 
     public static Set<String> set = new HashSet<>(Arrays.asList(arr));
-    public static Map<String,String> hashDict =new HashMap<String, String>() {{
-        put("\"TranslationUnit\"", "a");
-        put("\"FunctionDefinition\"", "b");
-        put("\"IterationStatement\"", "c");
-        put("\"Expression\"", "d");
-        put("\"ArithmeticExpression\"", "e");
-        put("\"PostfixExpression\"", "f");
-        put("\"ParameterList\"", "g");
-        put("\"ParameterDeclaration\"", "h");
-        put("\"DeclarationSpecifier\"", "f");
-        put("\"TypeSpecifier\"", "g");
-        put("\"DeclarationSpecifier\"", "h");
-        put("\"TypeSpecifier\"", "h");
-    }};
+    public static Map<String,String> hashDict = Map.of(
+        "\"TranslationUnit\"", "a",
+        "\"FunctionDefinition\"", "b",
+        "\"IterationStatement\"", "c",
+        "\"Expression\"", "d",
+        "\"ArithmeticExpression\"", "e",
+        "\"PostfixExpression\"", "f",
+        "\"ParameterList\"", "g",
+        "\"ParameterDeclaration\"", "h",
+        "\"DeclarationSpecifier\"", "i",
+        "\"TypeSpecifier\"", "j"
+     );
+
 
     public static int hash(String input) {
         int h = 0;
@@ -58,7 +57,7 @@ public class Algorithm{
                 temp = temp.concat(list.get(i));
             }
             temp= hashDict.get(root.getType())+temp;
-      
+
             list.addFirst(temp);
             temp ="";
             return list;
