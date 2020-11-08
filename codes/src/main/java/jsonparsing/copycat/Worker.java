@@ -10,7 +10,6 @@ public class Worker {
         double score = 0.0;
 
         return score;
-
     }
 
     public double compareBreadthWise(AbstractSyntaxTree tree1, AbstractSyntaxTree tree2){

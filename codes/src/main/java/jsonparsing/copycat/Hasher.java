@@ -3,7 +3,7 @@ package jsonparsing.copycat;
 import jsonparsing.entity.AbstractSyntaxTree;
 
 public class Hasher {
-    public Long hash(AbstractSyntaxTree root){
+    public long hash(AbstractSyntaxTree root){
         // recursively traverse the tree
 
 
@@ -34,9 +34,9 @@ public class Hasher {
          *  -
          */
         //
-        double score = 0.0;
+        long score = 0L;
 
-        return score;
+        return (long) score;
 
     }
 
