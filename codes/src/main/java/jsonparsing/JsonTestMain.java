@@ -24,11 +24,10 @@ public class JsonTestMain {
         String fileName = "src/main/resources/json/out.json";
         String json = readFileAsString(fileName);
         try {
-            List<Object> result = new ArrayList<>();
             JsonNode node = parse(json);
             AbstractSyntaxTree ast= new AbstractSyntaxTree();
-            result = JsonToTree.traverse(node, result, ast, null);
-            System.out.println(result);
+            ast = JsonToTree.traverse(node, ast, null);
+
         }
         catch(IOException e){
             e.printStackTrace();

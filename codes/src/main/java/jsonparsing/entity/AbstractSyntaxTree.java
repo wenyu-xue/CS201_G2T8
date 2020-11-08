@@ -18,5 +18,9 @@ public class AbstractSyntaxTree {
 
     public void addChild(Node parent, Node child ){
         parent.addChild(child);
+        size++;
+    }
+
+    public void printTree(Node root){
     }
 }

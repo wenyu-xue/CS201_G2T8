@@ -11,47 +11,43 @@ import java.util.Stack;
 
 
 public class JsonToTree {
-    private static AbstractSyntaxTree ast = new AbstractSyntaxTree();
-
-    public static List<Object> traverse(JsonNode root, List<Object> result, AbstractSyntaxTree ast, Node parent){
+    public static AbstractSyntaxTree traverse(JsonNode root, AbstractSyntaxTree ast, Node parent){
         if(root.isObject()){
             // base case :
-            processNode(root, result, ast, parent);
+            processNode(root, ast, parent);
         } else if (root.isArray()){
             // Process children
-            processChildren(root, result, ast, parent);
+            processChildren(root, ast, parent);
         }
-        return result;
+        return ast;
     }
 
-    public static List<Object> processChildren(JsonNode root, List<Object> result, AbstractSyntaxTree ast, Node parent){
+    public static AbstractSyntaxTree processChildren(JsonNode root, AbstractSyntaxTree ast, Node parent){
         // Traverse children of JSON
         ArrayNode arrayNode = (ArrayNode) root;
         for(int i = 0; i < arrayNode.size(); i++) {
             JsonNode arrayElement = arrayNode.get(i);
-            traverse(arrayElement, result, ast, parent);
+            traverse(arrayElement, ast, parent);
         }
-        return result;
+        return ast;
     }
 
-    public static List<Object> processNode(JsonNode root, List<Object> result, AbstractSyntaxTree ast, Node parent){
-        int childrenNumber = root.get("children").size();
-        String type = root.get("type").toString();
-        String content = root.get("content").toString();
+    public static AbstractSyntaxTree processNode(JsonNode root, AbstractSyntaxTree ast, Node parent){
         JsonNode children= root.get("children");
 
         // Insert into tree
         Node node = Node.fromJsonNode(parent, root);
-        System.out.println(" Children number: " + childrenNumber + " , type: " + type
-                            + "content:" + content);
-        result.add(content);
-
+        if (parent == null){
+            ast.addRoot(node);
+        } else {
+            ast.addChild(parent, node);
+        }
 
         // Continue traversing Json
         if (children != null){
             parent = node;
-            traverse(children, result, ast, parent);
+            traverse(children, ast, parent);
         }
-        return result;
+        return ast;
     }
 }
